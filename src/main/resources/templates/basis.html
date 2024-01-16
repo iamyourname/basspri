@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <title>Dashboard Template · Bootstrap v5.0</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="dashboard.css" rel="stylesheet">
+        <link href="chartjs.css" rel="stylesheet">
+    </head>
+    <body>
+        <header style="background: #ffce3a;" class="flex-md-nowrap navbar navbar-dark p-0 shadow sticky-top">
+            <a style="background: #ffce3a;" class="col-lg-2 col-md-3 me-0 navbar-brand px-3 shadow-lg text-black-50 text-uppercase" href="#"><b class="fw-bold text-black text-uppercase">BASIS_SUPPORT</b></a>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+            </button>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-lg-2 col-md-3 collapse d-md-block sidebar" style="background: #ffce3a;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:100px;">
+                    <div class="position-sticky pt-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="active fw-bold link-dark nav-link" aria-current="page" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>&nbsp;Статус</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <div class="align-items-center border-bottom d-flex flex-md-nowrap flex-wrap mb-3 pb-2 pt-3">
+                        <h1 class="h2" style="text-align: left;">Состояние системы:&nbsp;</h1>
+
+                        <h1 style="text-align: left;" class="h5 text-end" th:utext="${dateTime}"></h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card text-dark bg-light mb-3">
+                                <div class="card-header">Доступность</div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <div class="list-group" style="margin-bottom: 38px;">
+                                    <a href="#" class="fs-6 list-group-item list-group-item-action list-group-item-light">
+                                        <h6 class="float-start fs-6 w-50">Процент ошибочных операций&nbsp; &nbsp; &nbsp;</h6>
+                                        <div class="progress" style="height: 4%;">
+                                                    <div class="bg-danger progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" th:style="'width: '+ (${percent_errors}+3) + '%'"   th:aria-valuenow="${percent_errors}"  aria-valuemin="0" aria-valuemax="25">
+                                                        <b class="text-center" th:utext="${percent_errors} + '%'"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h4 class="float-start fs-6 w-50">Успешных операций&nbsp; &nbsp; &nbsp;</h4><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b class="bg-white fs-6 text-center text-success text-uppercase" th:utext="${success_count}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h6 class="float-start fs-6 w-50">Доступность zakupki.beeline.ru</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b class="bg-white fs-6 text-center text-success text-uppercase" th:utext="${zakupki_status}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h6 class="float-start w-50">Пользователей в системе</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b style="font-size: 20px;" class="bg-white fs-6 text-black text-center text-uppercase" th:utext="${users_count}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h6 class="float-start w-50">Максимум пользователей сегодня</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                         <b style="font-size: 20px;" class="bg-white fs-6 text-black text-center text-uppercase" th:utext="${max_users_count}"></b>
+                                        </div>
+                                    </div></a>
+                                        </div></p>
+                                </div>
+                            </div>                                                          
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card text-dark bg-light mb-3">
+                                <div class="card-header">Статистика инцидентов</div>
+                                <div class="card-body">
+                                    <p class="card-text"><div class="list-group" style="margin-bottom: 38px;"><a href="#" class="fs-6 list-group-item list-group-item-action list-group-item-light"><h6 class="float-start fs-6 w-50">Всего инцидентов</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b class="bg-white fs-6 text-center text-success text-uppercase" th:utext="${all_inc}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h4 class="float-start fs-6 w-50">Пришло за сегодня</h4><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b class="bg-white fs-6 text-center text-success text-uppercase" th:utext="${incoming_inc}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h6 class="float-start fs-6 w-50">Решено за сегодня</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b class="bg-white fs-6 text-center text-success text-uppercase" th:utext="${done_inc}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h6 class="float-start w-50">Инцидентов в работе</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b style="font-size: 20px;" class="bg-white fs-6 text-black text-center text-uppercase" th:utext="${in_work_inc}"></b>
+                                                    </div>
+                                                </div></a>
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light"><h6 class="float-start w-50">В ожидании</h6><div class="bg-white progress" style="height: 4%;">
+                                                    <div class="progress-bar progress-bar-animated progress-bar-striped rounded" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <b style="font-size: 20px;" class="bg-white fs-6 text-black text-center text-uppercase" th:utext="${wait_inc}"></b>
+                                                    </div>
+                                                </div></a>
+                                        </div><table class="table table-hover"> 
+                                            <thead style="background: #ffce3a;"> 
+                                                <tr> 
+                                                    <th scope="col" class="w-auto">#</th> 
+                                                    <th scope="col" class="w-25">Номер инцидента</th> 
+                                                    <th scope="col">Время просрочки</th> 
+                                                </tr>                                                 
+                                            </thead>                                             
+
+                                            <tbody>
+                                                <th:block th:each="r : ${expired_ind}">
+                                                        <tr>
+                                                            <th:block th:each="t : ${r}" >
+                                                            <td th:utext="${t}" onClick="incView(this)" ></td>
+                                                            </th:block>
+                                                        </tr>
+                                                </th:block>
+                                                <!--
+                                                https://helpdesk.beeline.ru/arsys/forms/ms-hdop-1/TT:Main-USER/WebView/?mode=submit&F800510009=
+                                                -->
+
+                                            </tbody>                                             
+                                        </table></p>
+                                    <script>
+                                        function incView(elem){
+                                            var inc ="https://helpdesk.beeline.ru/arsys/forms/ms-hdop-1/TT:Main-USER/WebView/?mode=submit&F800510009=" + elem.innerText;
+                                            //  alert(inc);
+                                            window.location = inc;
+                                        }
+
+                                    </script>
+                                </div>
+                            </div>                                                          
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+        <script>
+        /* globals Chart:false, feather:false */
+
+        (function () {
+            'use strict'
+
+            feather.replace()
+
+            // Graphs
+            var ctx = document.getElementById('myChart')
+            // eslint-disable-next-line no-unused-vars
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        'Sunday',
+                        'Monday',
+                        'Tuesday',
+                        'Wednesday',
+                        'Thursday',
+                        'Friday',
+                        'Saturday'
+                    ],
+                    datasets: [{
+                        data: [
+                            15339,
+                            21345,
+                            18483,
+                            24003,
+                            23489,
+                            24092,
+                            12034
+                        ],
+                        lineTension: 0,
+                        backgroundColor: 'transparent',
+                        borderColor: '#007bff',
+                        borderWidth: 4,
+                        pointBackgroundColor: '#007bff'
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            })
+        })()
+    </script>
+    </body>
+</html>
